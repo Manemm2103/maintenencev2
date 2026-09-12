@@ -1,4 +1,5 @@
 import bcrypt from 'bcryptjs';
+import { config } from './config.js';
 import { id } from './utils.js';
 
 async function executeAll(connection, statements) {
@@ -26,6 +27,29 @@ async function ensureCustomer(connection) {
   );
 
   return customerId;
+}
+
+async function ensureAdmin(connection) {
+  const email = config.admin.email.toLowerCase();
+  const existing = await one(connection, 'SELECT id FROM admins WHERE email = ? LIMIT 1', [email]);
+  const passwordHash = await bcrypt.hash(config.admin.password, 10);
+
+  if (existing) {
+    await connection.execute(
+      'UPDATE admins SET name = ?, password_hash = ?, is_active = 1 WHERE id = ?',
+      [config.admin.name, passwordHash, existing.id]
+    );
+    return existing.id;
+  }
+
+  const adminId = id();
+  await connection.execute(
+    `INSERT INTO admins (id, name, email, password_hash, role, is_active)
+     VALUES (?, ?, ?, ?, ?, ?)`,
+    [adminId, config.admin.name, email, passwordHash, 'admin', 1]
+  );
+
+  return adminId;
 }
 
 async function ensureServiceType(connection, slug, name, category, description, duration, cadenceMonths = null) {
@@ -61,6 +85,7 @@ async function ensureProperty(connection, customerId, name, propertyType, area, 
 }
 
 async function seedDemoData(connection) {
+  await ensureAdmin(connection);
   const customerId = await ensureCustomer(connection);
 
   const acId = await ensureServiceType(
@@ -205,6 +230,17 @@ export async function migrateAndSeed(pool) {
         email VARCHAR(255) NOT NULL UNIQUE,
         phone VARCHAR(64),
         password_hash VARCHAR(255) NOT NULL,
+        created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+      ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci`,
+
+      `CREATE TABLE IF NOT EXISTS admins (
+        id CHAR(36) PRIMARY KEY,
+        name VARCHAR(255) NOT NULL,
+        email VARCHAR(255) NOT NULL UNIQUE,
+        password_hash VARCHAR(255) NOT NULL,
+        role VARCHAR(50) NOT NULL DEFAULT 'admin',
+        is_active TINYINT(1) NOT NULL DEFAULT 1,
         created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
         updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
       ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci`,

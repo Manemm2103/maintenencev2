@@ -13,6 +13,11 @@ export const config = {
   corsOrigin: process.env.CORS_ORIGIN || '*',
   jwtSecret: process.env.JWT_SECRET || 'development_only_change_me',
   jwtExpiresIn: process.env.JWT_EXPIRES_IN || '7d',
+  admin: {
+    email: process.env.ADMIN_EMAIL || 'admin@drhome.ae',
+    password: process.env.ADMIN_PASSWORD || 'admin123456',
+    name: process.env.ADMIN_NAME || 'DR HOME Admin'
+  },
   contact: {
     phone: process.env.CONTACT_PHONE || '055 566 2007',
     whatsapp: process.env.CONTACT_WHATSAPP || '971555662007',
@@ -30,4 +35,8 @@ export const config = {
 
 if (config.nodeEnv === 'production' && config.jwtSecret === 'development_only_change_me') {
   console.warn('JWT_SECRET is using the default development value.');
+}
+
+if (config.nodeEnv === 'production' && config.admin.password === 'admin123456') {
+  console.warn('ADMIN_PASSWORD is using the default development value.');
 }

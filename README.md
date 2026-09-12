@@ -24,6 +24,12 @@ Frontend:
 GET http://localhost:3000/
 ```
 
+Admin backend:
+
+```text
+GET http://localhost:3000/admin/
+```
+
 Ports can be changed in `.env`:
 
 ```text
@@ -39,6 +45,14 @@ Seeded demo login:
 ```text
 login@login.de / 123456
 ```
+
+Seeded admin login:
+
+```text
+admin@drhome.ae / admin123456
+```
+
+Set `ADMIN_EMAIL`, `ADMIN_PASSWORD` and `ADMIN_NAME` in production. The admin account is created or updated during container startup.
 
 ## GitHub push
 
@@ -119,6 +133,25 @@ Content-Type: application/json
 - `POST /api/support/messages`
 - `POST /api/auth/forgot-password`
 
+## Admin endpoints
+
+- `POST /api/admin/auth/login`
+- `GET /api/admin/auth/me`
+- `GET /api/admin/dashboard`
+- `GET /api/admin/customers`
+- `GET /api/admin/customers/:id`
+- `GET /api/admin/properties`
+- `GET /api/admin/service-types`
+- `GET /api/admin/service-requests`
+- `PATCH /api/admin/service-requests/:id`
+- `GET /api/admin/appointments`
+- `POST /api/admin/appointments`
+- `PATCH /api/admin/appointments/:id`
+- `GET /api/admin/notifications`
+- `POST /api/admin/notifications`
+- `GET /api/admin/support-messages`
+- `PATCH /api/admin/support-messages/:id`
+
 See [FRONTEND_MAP.md](FRONTEND_MAP.md) for the mapping from the current HTML prototype pages to these API endpoints.
 
 ## Containers
@@ -147,5 +180,8 @@ MARIADB_USER=drhome
 MARIADB_PASSWORD=choose_a_secure_password
 MARIADB_ROOT_PASSWORD=choose_a_secure_root_password
 JWT_SECRET=choose_a_long_random_secret
+ADMIN_EMAIL=admin@drhome.ae
+ADMIN_PASSWORD=choose_a_secure_admin_password
+ADMIN_NAME=DR HOME Admin
 CORS_ORIGIN=https://maintenance.drhome.ae
 ```

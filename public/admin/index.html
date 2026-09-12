@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#0b0b0c">
+  <title>DR HOME Admin</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="shell">
+    <section id="loginView" class="login-view">
+      <div class="login-panel">
+        <img src="../logo.png" alt="DR HOME" class="logo">
+        <p class="eyebrow">Admin Portal</p>
+        <h1>DR HOME Maintenance</h1>
+        <form id="loginForm" class="form">
+          <label>
+            <span>E-Mail</span>
+            <input id="email" type="email" autocomplete="username" placeholder="admin@drhome.ae" required>
+          </label>
+          <label>
+            <span>Passwort</span>
+            <input id="password" type="password" autocomplete="current-password" required>
+          </label>
+          <button type="submit">Anmelden</button>
+          <div id="loginError" class="error" hidden></div>
+        </form>
+      </div>
+    </section>
+
+    <section id="appView" class="app-view" hidden>
+      <aside class="sidebar">
+        <div class="brand">
+          <img src="../logo.png" alt="DR HOME">
+          <div>
+            <strong>DR HOME</strong>
+            <span>Maintenance Admin</span>
+          </div>
+        </div>
+        <nav class="tabs" aria-label="Admin views">
+          <button class="tab active" data-tab="dashboard">Uebersicht</button>
+          <button class="tab" data-tab="requests">Anfragen</button>
+          <button class="tab" data-tab="customers">Kunden</button>
+          <button class="tab" data-tab="properties">Objekte</button>
+          <button class="tab" data-tab="appointments">Termine</button>
+          <button class="tab" data-tab="notifications">Benachrichtigungen</button>
+          <button class="tab" data-tab="support">Support</button>
+        </nav>
+        <button id="logoutBtn" class="logout" type="button">Abmelden</button>
+      </aside>
+
+      <section class="content">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">Backend</p>
+            <h2 id="viewTitle">Uebersicht</h2>
+          </div>
+          <div class="top-actions">
+            <span id="adminName" class="admin-name"></span>
+            <button id="refreshBtn" type="button">Aktualisieren</button>
+          </div>
+        </header>
+
+        <div id="notice" class="notice" hidden></div>
+
+        <section id="dashboard" class="view active">
+          <div id="stats" class="stats"></div>
+          <div class="section-grid">
+            <section class="panel">
+              <div class="panel-head">
+                <h3>Neue Service-Anfragen</h3>
+              </div>
+              <div id="recentRequests" class="list"></div>
+            </section>
+            <section class="panel">
+              <div class="panel-head">
+                <h3>Naechste Termine</h3>
+              </div>
+              <div id="upcomingAppointments" class="list"></div>
+            </section>
+          </div>
+        </section>
+
+        <section id="requests" class="view">
+          <section class="panel">
+            <div class="panel-head">
+              <h3>Service-Anfragen</h3>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Kunde</th>
+                    <th>Objekt</th>
+                    <th>Service</th>
+                    <th>Beschreibung</th>
+                    <th>Status</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody id="requestsTable"></tbody>
+              </table>
+            </div>
+          </section>
+        </section>
+
+        <section id="customers" class="view">
+          <section class="panel">
+            <div class="panel-head">
+              <h3>Kunden</h3>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>E-Mail</th>
+                    <th>Telefon</th>
+                    <th>Objekte</th>
+                    <th>Anfragen</th>
+                  </tr>
+                </thead>
+                <tbody id="customersTable"></tbody>
+              </table>
+            </div>
+          </section>
+        </section>
+
+        <section id="properties" class="view">
+          <section class="panel">
+            <div class="panel-head">
+              <h3>Objekte</h3>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Objekt</th>
+                    <th>Kunde</th>
+                    <th>Typ</th>
+                    <th>Area</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="propertiesTable"></tbody>
+              </table>
+            </div>
+          </section>
+        </section>
+
+        <section id="appointments" class="view">
+          <section class="panel form-panel">
+            <div class="panel-head">
+              <h3>Termin anlegen</h3>
+            </div>
+            <form id="appointmentForm" class="inline-form">
+              <label>
+                <span>Kunde</span>
+                <select id="appointmentCustomer" required></select>
+              </label>
+              <label>
+                <span>Objekt</span>
+                <select id="appointmentProperty" required></select>
+              </label>
+              <label>
+                <span>Service</span>
+                <select id="appointmentService"></select>
+              </label>
+              <label>
+                <span>Titel</span>
+                <input id="appointmentTitle" value="Maintenance Appointment" required>
+              </label>
+              <label>
+                <span>Start</span>
+                <input id="appointmentStart" type="datetime-local" required>
+              </label>
+              <label>
+                <span>Ende</span>
+                <input id="appointmentEnd" type="datetime-local">
+              </label>
+              <button type="submit">Termin speichern</button>
+            </form>
+          </section>
+          <section class="panel">
+            <div class="panel-head">
+              <h3>Termine</h3>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Termin</th>
+                    <th>Kunde</th>
+                    <th>Objekt</th>
+                    <th>Zeit</th>
+                    <th>Status</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody id="appointmentsTable"></tbody>
+              </table>
+            </div>
+          </section>
+        </section>
+
+        <section id="notifications" class="view">
+          <section class="panel form-panel">
+            <div class="panel-head">
+              <h3>Benachrichtigung erstellen</h3>
+            </div>
+            <form id="notificationForm" class="inline-form">
+              <label>
+                <span>Kunde</span>
+                <select id="notificationCustomer" required></select>
+              </label>
+              <label>
+                <span>Titel</span>
+                <input id="notificationTitle" value="DR HOME Update" required>
+              </label>
+              <label class="wide">
+                <span>Nachricht</span>
+                <input id="notificationBody" value="Your service request has been updated." required>
+              </label>
+              <button type="submit">Senden</button>
+            </form>
+          </section>
+          <section class="panel">
+            <div class="panel-head">
+              <h3>Letzte Benachrichtigungen</h3>
+            </div>
+            <div id="notificationsList" class="list"></div>
+          </section>
+        </section>
+
+        <section id="support" class="view">
+          <section class="panel">
+            <div class="panel-head">
+              <h3>Support-Nachrichten</h3>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Kunde</th>
+                    <th>Objekt</th>
+                    <th>Betreff</th>
+                    <th>Nachricht</th>
+                    <th>Status</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody id="supportTable"></tbody>
+              </table>
+            </div>
+          </section>
+        </section>
+      </section>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>

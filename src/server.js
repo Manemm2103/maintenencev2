@@ -7,8 +7,11 @@ import { pool, waitForDatabase } from './db.js';
 import { migrateAndSeed } from './migrate.js';
 import { ApiError } from './errors.js';
 import { requireAuth } from './middleware/auth.js';
+import { requireAdminAuth } from './middleware/adminAuth.js';
 import { authRouter } from './routes/auth.js';
 import { apiRouter } from './routes/api.js';
+import { adminAuthRouter } from './routes/adminAuth.js';
+import { adminRouter } from './routes/admin.js';
 
 function corsOptions() {
   if (config.corsOrigin === '*') {
@@ -31,6 +34,8 @@ app.get('/api/health', (_req, res) => {
 });
 
 app.use('/api/auth', authRouter);
+app.use('/api/admin/auth', adminAuthRouter);
+app.use('/api/admin', requireAdminAuth, adminRouter);
 app.use('/api', requireAuth, apiRouter);
 
 app.get('/', (_req, res) => {
