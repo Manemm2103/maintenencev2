@@ -121,3 +121,23 @@ See [FRONTEND_MAP.md](FRONTEND_MAP.md) for the mapping from the current HTML pro
 - `mariadb`: MariaDB 11.4 on port `3306`, persisted in the `mariadb_data` volume
 
 For production, change all passwords and `JWT_SECRET` in `.env`, restrict `CORS_ORIGIN`, and put the API behind TLS.
+
+## Portainer
+
+Portainer stack deployments do not automatically create a `.env` file next to the compose file. This compose file therefore uses inline defaults and can be deployed directly.
+
+Recommended Stack environment variables in Portainer:
+
+```text
+WEB_PORT=3000
+DB_HOST_PORT=3306
+DB_NAME=drhome_maintenance
+DB_USER=drhome
+DB_PASSWORD=choose_a_secure_password
+MARIADB_DATABASE=drhome_maintenance
+MARIADB_USER=drhome
+MARIADB_PASSWORD=choose_a_secure_password
+MARIADB_ROOT_PASSWORD=choose_a_secure_root_password
+JWT_SECRET=choose_a_long_random_secret
+CORS_ORIGIN=https://maintenance.drhome.ae
+```

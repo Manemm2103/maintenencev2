@@ -3,11 +3,21 @@ services:
     build: .
     container_name: drhome-maintenance-api
     restart: unless-stopped
-    env_file:
-      - .env
     environment:
+      NODE_ENV: "${NODE_ENV:-production}"
+      PORT: "${PORT:-3000}"
+      CORS_ORIGIN: "${CORS_ORIGIN:-*}"
       DB_HOST: mariadb
-      DB_PORT: 3306
+      DB_PORT: "${DB_PORT:-3306}"
+      DB_NAME: "${DB_NAME:-drhome_maintenance}"
+      DB_USER: "${DB_USER:-drhome}"
+      DB_PASSWORD: "${DB_PASSWORD:-drhome_password}"
+      JWT_SECRET: "${JWT_SECRET:-change_me_to_a_long_random_secret}"
+      JWT_EXPIRES_IN: "${JWT_EXPIRES_IN:-7d}"
+      CONTACT_PHONE: "${CONTACT_PHONE:-055 566 2007}"
+      CONTACT_WHATSAPP: "${CONTACT_WHATSAPP:-971555662007}"
+      CONTACT_EMAIL: "${CONTACT_EMAIL:-maintenance@drhome.ae}"
+      CONTACT_WEBSITE: "${CONTACT_WEBSITE:-https://www.drhome.ae}"
     ports:
       - "${WEB_PORT:-3000}:${PORT:-3000}"
     depends_on:
@@ -18,8 +28,11 @@ services:
     image: mariadb:11.4
     container_name: drhome-maintenance-db
     restart: unless-stopped
-    env_file:
-      - .env
+    environment:
+      MARIADB_ROOT_PASSWORD: "${MARIADB_ROOT_PASSWORD:-change_me_root_password}"
+      MARIADB_DATABASE: "${MARIADB_DATABASE:-drhome_maintenance}"
+      MARIADB_USER: "${MARIADB_USER:-drhome}"
+      MARIADB_PASSWORD: "${MARIADB_PASSWORD:-drhome_password}"
     command:
       - --character-set-server=utf8mb4
       - --collation-server=utf8mb4_unicode_ci
