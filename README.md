@@ -18,6 +18,12 @@ API health check:
 GET http://localhost:3000/api/health
 ```
 
+Frontend:
+
+```text
+GET http://localhost:3000/
+```
+
 Ports can be changed in `.env`:
 
 ```text
@@ -119,6 +125,8 @@ See [FRONTEND_MAP.md](FRONTEND_MAP.md) for the mapping from the current HTML pro
 
 - `api`: Node.js/Express backend on port `3000`
 - `mariadb`: MariaDB 11.4 on port `3306`, persisted in the `mariadb_data` volume
+
+The container also serves the static frontend from `public/`, so the portal is available at `/` and the API stays under `/api/...`.
 
 For production, change all passwords and `JWT_SECRET` in `.env`, restrict `CORS_ORIGIN`, and put the API behind TLS.
 

@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b0b0c"><title>AC Maintenance · DR HOME</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#080809;color:#fff;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
+.app{max-width:430px;min-height:100vh;margin:auto;background:radial-gradient(circle at 20% 0,#1a1b1f 0,#0f1012 25%,#080809 65%);padding:calc(18px + env(safe-area-inset-top)) 18px 42px}
+.top{display:flex;align-items:center;justify-content:space-between}.back{width:40px;height:40px;border-radius:13px;border:1px solid #2d2f33;background:#17181a;color:#fff;display:grid;place-items:center;font-size:22px;text-decoration:none}.logo{width:78px}.spacer{width:40px}
+.kicker{margin-top:30px;color:#8f9298;font-size:11px;letter-spacing:1.7px;text-transform:uppercase}.title{font-size:30px;font-weight:780;margin:6px 0}.prop{color:#a7a9ae;font-size:14px}
+.hero{margin-top:22px;border-radius:22px;padding:21px;background:linear-gradient(145deg,#202227,#121315);border:1px solid rgba(255,255,255,.1);box-shadow:0 16px 38px rgba(0,0,0,.3)}
+.row{display:flex;align-items:center;gap:15px}.icon{width:54px;height:54px;border-radius:16px;background:#292b30;border:1px solid rgba(255,255,255,.09);display:grid;place-items:center}.icon svg{width:27px;stroke:#fff;fill:none;stroke-width:1.7}
+.big{font-size:20px;font-weight:720}.small{color:#a5a7ac;font-size:12px;margin-top:4px}.status{margin-top:20px;padding-top:17px;border-top:1px solid #303237;display:flex;justify-content:space-between}.due{color:#efc16a;font-weight:700}.section{margin:27px 1px 11px;font-size:18px;font-weight:720}
+.card{background:#151619;border:1px solid #292b2f;border-radius:17px;padding:17px;margin:10px 0}.label{font-size:11px;color:#898c91;text-transform:uppercase;letter-spacing:1.2px}.value{margin-top:7px;font-size:15px;line-height:1.45}.checks{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:12px}.check{padding:12px;border-radius:12px;background:#1e2023;font-size:12px;color:#d9dadd}.check:before{content:"✓";margin-right:7px;color:#70db95}
+.timeline{border-left:1px solid #35373b;margin-left:8px;padding-left:20px}.event{position:relative;margin:0 0 22px}.event:before{content:"";position:absolute;left:-25px;top:4px;width:9px;height:9px;border-radius:50%;background:#72db96;box-shadow:0 0 0 4px #18221c}.date{font-size:11px;color:#8f9298}.event b{display:block;margin:5px 0;font-size:14px}.event p{margin:0;color:#a5a7ac;font-size:12px;line-height:1.45}
+.btn{margin-top:25px;background:linear-gradient(#fff,#e8e9eb);color:#111;border-radius:16px;padding:16px;text-align:center;font-weight:780}.secondary{margin-top:10px;border:1px solid #34363a;border-radius:16px;padding:15px;text-align:center;font-weight:650;font-size:14px}
+
+.contact-fab{
+  position:fixed;
+  right:max(18px,calc((100vw - 430px)/2 + 18px));
+  bottom:92px;
+  z-index:30;
+  width:54px;height:54px;border-radius:50%;
+  background:#fff;color:#111;
+  display:grid;place-items:center;
+  border:1px solid rgba(255,255,255,.7);
+  box-shadow:0 14px 34px rgba(0,0,0,.38);
+  cursor:pointer;
+}
+.contact-fab svg{width:24px;height:24px;fill:none;stroke:#111;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+
+
+.contact-fab{
+  background:#25D366!important;
+  border:1px solid rgba(255,255,255,.22)!important;
+  box-shadow:0 14px 34px rgba(0,0,0,.38),0 0 0 1px rgba(37,211,102,.10)!important;
+}
+.contact-fab svg{stroke:#fff!important;stroke-width:1.9!important}
+.contact-fab:active{transform:scale(.96)}
+
+</style><script src="auth.js"></script></head><body><main class="app">
+<div class="top"><a class="back" href="index.html">‹</a><img class="logo" src="logo.png"><div class="spacer"></div></div>
+<div class="kicker">Maintenance detail</div><div class="title">AC Maintenance</div><div class="prop">Opal Tower - Marina</div>
+<div class="hero"><div class="row"><div class="icon"><svg viewBox="0 0 24 24"><path d="M12 2v20M4.9 6l14.2 12M19.1 6L4.9 18M3 12h18"/></svg></div><div><div class="big">Preventive AC Service</div><div class="small">Recommended every 6 months</div></div></div>
+<div class="status"><span>Next appointment</span><span class="due" style="color:#7cdf9d">23 Sep · 10:00–12:00</span></div></div>
+
+<div class="section">Confirmed appointment</div>
+<div class="card"><div class="label">Appointment details</div><div class="value"><b>23 September 2026 · 10:00–12:00</b><br><span style="color:#9fa2a7">Status: Confirmed · Estimated duration: 60–90 minutes</span></div>
+<div class="checks"><div class="check">Filter cleaning</div><div class="check">Drain flushing</div><div class="check">Coil inspection</div><div class="check">Cooling check</div></div></div>
+
+<div class="section">Service history</div>
+<div class="card"><div class="timeline">
+<div class="event"><div class="date">18 JUN 2026</div><b>AC Deep Cleaning</b><p>Filters cleaned, drain flushed and cooling performance checked.</p></div>
+<div class="event"><div class="date">12 DEC 2025</div><b>Preventive AC Service</b><p>Routine maintenance completed. No defects reported.</p></div>
+</div></div>
+
+<div class="section">Documents</div>
+<div class="card" onclick="location.href='documents.html'" style="cursor:pointer"><div class="value">Service Report · 18 Jun 2026 <span style="float:right">›</span></div></div>
+<div class="btn" onclick="location.href='book.html'" style="cursor:pointer">Book Maintenance</div><div class="secondary" onclick="location.href='service.html'" style="cursor:pointer">Report an AC Problem</div>
+</main><div class="contact-fab" onclick="location.href='https://wa.me/971555662007?text=Hello%20DR%20HOME%2C%20I%20need%20help%20with%20my%20property.'" aria-label="WhatsApp DR HOME">
+<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.5 8.5 0 0 1-9 8.5 9.3 9.3 0 0 1-3.8-.8L3 21l1.8-4.8A8.5 8.5 0 1 1 21 11.5Z"/><path d="M8.7 8.7c.6 2.8 2.1 4.3 4.8 5.6"/><path d="M14 14.1l1.6-.7 1.5 1.2"/></svg>
+</div>
+</body></html>

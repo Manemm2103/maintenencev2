@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b0b0c">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="logo.png">
+<title>DR HOME Maintenance</title>
+<style>
+*{box-sizing:border-box} body{margin:0;background:#09090a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
+.app{max-width:430px;min-height:100vh;margin:auto;background:radial-gradient(circle at 20% 0%,#1a1b1f 0,#0f1012 24%,#080809 62%);padding:calc(18px + env(safe-area-inset-top)) 18px 100px}
+.top{display:flex;align-items:center;justify-content:space-between}
+.brand-badge{
+  position:relative;
+  width:132px;
+  height:72px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.brand-badge:before{
+  content:"";
+  position:absolute;
+  inset:3px 10px;
+  border-radius:50%;
+  background:
+    radial-gradient(circle at 35% 25%,rgba(255,255,255,.16),transparent 28%),
+    radial-gradient(circle at 50% 70%,rgba(255,255,255,.055),transparent 48%),
+    linear-gradient(145deg,rgba(255,255,255,.08),rgba(255,255,255,.015));
+  border:1px solid rgba(255,255,255,.16);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.18),
+    inset 0 -12px 25px rgba(0,0,0,.5),
+    0 9px 28px rgba(0,0,0,.48),
+    0 0 0 1px rgba(255,255,255,.025);
+  backdrop-filter:blur(8px);
+}
+.brand-badge:after{
+  content:"";
+  position:absolute;
+  inset:7px 14px;
+  border-radius:50%;
+  border:1px solid rgba(255,255,255,.08);
+  pointer-events:none;
+}
+.logo{
+  position:relative;
+  z-index:2;
+  width:108px;
+  height:auto;
+  filter:drop-shadow(0 2px 2px rgba(0,0,0,.85)) drop-shadow(0 0 8px rgba(255,255,255,.06));
+}
+.avatar{width:38px;height:38px;border:1px solid #34363a;border-radius:50%;display:grid;place-items:center;font-weight:700}
+.eyebrow{color:#8f9298;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;margin-top:30px}.hello{font-size:30px;font-weight:760;margin:5px 0 4px}.sub{color:#a4a7ad;font-size:14px}
+.property{
+  margin-top:25px;
+  border:1px solid rgba(255,255,255,.10);
+  border-radius:22px;
+  overflow:hidden;
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.01)),
+    #131416;
+  box-shadow:0 16px 40px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.05);
+}
+.hero{
+  position:relative;
+  height:172px;
+  padding:22px;
+  display:flex;
+  align-items:flex-end;
+  overflow:hidden;
+  background:
+    linear-gradient(180deg,rgba(0,0,0,.04),rgba(0,0,0,.70)),
+    url("opal-tower-marina.jpg") center 48% / cover no-repeat;
+}
+.hero:before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(90deg,rgba(0,0,0,.10),transparent 55%);
+  opacity:1;
+}
+.hero:after{
+  content:"PROPERTY";
+  position:absolute;
+  top:16px;
+  right:18px;
+  font-size:10px;
+  letter-spacing:2px;
+  color:rgba(255,255,255,.45);
+}
+.hero>div{position:relative;z-index:2}
+.hero h2{margin:0;font-size:24px;letter-spacing:-.3px}
+.hero p{margin:6px 0 0;color:#c1c4ca;font-size:13px}
+.status{padding:17px 18px;display:flex;justify-content:space-between;align-items:center}.ok{font-size:13px}.dot{display:inline-block;width:9px;height:9px;background:#62d68b;border-radius:50%;margin-right:7px}.switch{color:#aaa;font-size:13px}
+.section{display:flex;justify-content:space-between;align-items:center;margin:28px 1px 12px}.section h3{margin:0;font-size:18px}.section span{font-size:12px;color:#9b9da2}
+.card{
+  background:linear-gradient(180deg,#17181b,#141517);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:17px;
+  padding:16px;
+  margin:10px 0;
+  display:flex;
+  gap:14px;
+  align-items:center;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.035),0 7px 18px rgba(0,0,0,.14)
+}
+.ico{
+  width:46px;
+  height:46px;
+  border-radius:14px;
+  background:linear-gradient(180deg,#292b30,#1c1e22);
+  border:1px solid rgba(255,255,255,.08);
+  display:grid;
+  place-items:center;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.06)
+}
+.ico svg{width:23px;height:23px;stroke:#f3f4f6;stroke-width:1.8;fill:none;stroke-linecap:round;stroke-linejoin:round}.grow{flex:1}.title{font-weight:650}.meta{color:#9b9da2;font-size:12px;margin-top:4px}.due{font-size:12px;text-align:right}.soon{color:#f0c46b}.done{color:#69d791}
+.action{
+  margin-top:22px;
+  background:linear-gradient(180deg,#fff,#e9eaec);
+  color:#111;
+  border-radius:16px;
+  padding:16px;
+  text-align:center;
+  font-weight:780;
+  letter-spacing:.1px;
+  box-shadow:0 8px 22px rgba(255,255,255,.08),inset 0 1px 0 #fff
+}
+.appt{
+  margin-top:18px;
+  padding:17px;
+  border-radius:18px;
+  background:linear-gradient(145deg,#181a1d,#111214);
+  border:1px solid rgba(255,255,255,.09);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.035),0 10px 24px rgba(0,0,0,.18)
+}
+.appt-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.appt-title{font-size:13px;font-weight:750}
+.pill{font-size:10px;font-weight:750;letter-spacing:.5px;color:#8be0a8;background:rgba(74,170,105,.12);border:1px solid rgba(117,221,153,.22);padding:6px 8px;border-radius:999px}
+.appt-body{display:flex;align-items:center;gap:13px}.appt-date{width:54px;height:58px;border-radius:14px;background:#23252a;border:1px solid rgba(255,255,255,.08);display:grid;place-items:center;text-align:center}
+.appt-date b{display:block;font-size:20px;line-height:18px}.appt-date span{font-size:9px;color:#a6a8ad;letter-spacing:1px}
+.appt-main{flex:1}.appt-main b{font-size:14px}.appt-main div{font-size:12px;color:#9da0a5;margin-top:4px}
+.appt-chevron{font-size:22px;color:#8e9196}
+nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(430px,100%);height:76px;background:rgba(13,13,14,.96);border-top:1px solid #26272a;display:flex;justify-content:space-around;align-items:center;padding-bottom:env(safe-area-inset-bottom)}
+nav div{font-size:11px;color:#85878c;text-align:center}nav b{display:block;color:#fff;font-size:20px;margin-bottom:4px}
+
+.contact-fab{
+  position:fixed;
+  right:max(18px,calc((100vw - 430px)/2 + 18px));
+  bottom:92px;
+  z-index:30;
+  width:54px;height:54px;border-radius:50%;
+  background:#fff;color:#111;
+  display:grid;place-items:center;
+  border:1px solid rgba(255,255,255,.7);
+  box-shadow:0 14px 34px rgba(0,0,0,.38);
+  cursor:pointer;
+}
+.contact-fab svg{width:24px;height:24px;fill:none;stroke:#111;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+
+
+.contact-fab{
+  background:#25D366!important;
+  border:1px solid rgba(255,255,255,.22)!important;
+  box-shadow:0 14px 34px rgba(0,0,0,.38),0 0 0 1px rgba(37,211,102,.10)!important;
+}
+.contact-fab svg{stroke:#fff!important;stroke-width:1.9!important}
+.contact-fab:active{transform:scale(.96)}
+
+</style><script src="auth.js"></script></head>
+<body><main class="app">
+<div class="top"><div class="brand-badge"><img class="logo" src="logo.png" alt="DR HOME"></div><div class="avatar" onclick="location.href='more.html'" style="cursor:pointer">DR</div></div>
+<div class="eyebrow">Your property maintenance</div>
+<div class="hello">Good afternoon, Daniel.</div>
+<div class="sub">Everything important about your home, in one place.</div>
+
+<div class="property"><div class="hero"><div><h2>Opal Tower - Marina</h2><p>Primary property · Apartment</p></div></div>
+<div class="status"><div class="ok"><span class="dot"></span>Property status: Good</div><div class="switch" onclick="location.href='properties.html'" style="cursor:pointer">Change property ›</div></div></div>
+
+<div class="appt" onclick="location.href='maintenance.html'" style="cursor:pointer">
+  <div class="appt-head">
+    <div class="appt-title">Upcoming Appointment</div>
+    <div class="pill">CONFIRMED</div>
+  </div>
+  <div class="appt-body">
+    <div class="appt-date"><div><b>23</b><span>SEP</span></div></div>
+    <div class="appt-main"><b>AC Maintenance</b><div>10:00–12:00 · Opal Tower - Marina</div></div>
+    <div class="appt-chevron">›</div>
+  </div>
+</div>
+
+<div class="section"><h3>Coming up</h3><span>VIEW ALL</span></div>
+<div class="card" onclick="location.href='maintenance.html'" style="cursor:pointer"><div class="ico">
+<svg viewBox="0 0 24 24" aria-hidden="true">
+<path d="M12 2v20M4.9 6l14.2 12M19.1 6L4.9 18M3 12h18"/>
+<path d="M12 2l-2 2m2-2l2 2M12 22l-2-2m2 2l2-2M4.9 6l.2 2.8M4.9 6l2.8-.2M19.1 18l-.2-2.8M19.1 18l-2.8.2"/>
+</svg>
+</div><div class="grow"><div class="title">AC Maintenance</div><div class="meta">Cleaning · Filter · Drain inspection</div></div><div class="due soon">Due in<br><b>12 days</b></div></div>
+<div class="card"><div class="ico">
+<svg viewBox="0 0 24 24" aria-hidden="true">
+<path d="M5 11h10a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4z"/>
+<path d="M15 11v2M7 14v1M11 14v2M15 14v1M19 14v2"/>
+<path d="M5 11V8a5 5 0 0 1 5-5h1"/>
+</svg>
+</div><div class="grow"><div class="title">Water & Plumbing Check</div><div class="meta">Preventive inspection</div></div><div class="due">Due in<br><b>3 months</b></div></div>
+
+<div class="section"><h3>Recently completed</h3><span>HISTORY</span></div>
+<div class="card"><div class="ico">
+<svg viewBox="0 0 24 24" aria-hidden="true">
+<circle cx="12" cy="12" r="8"/>
+<path d="M8.5 12.2l2.3 2.3 4.8-5"/>
+</svg>
+</div><div class="grow"><div class="title">AC Deep Cleaning</div><div class="meta">18 Jun 2026 · DR HOME Technician</div></div><div class="due done">Completed</div></div>
+
+<div class="action">Request Service</div>
+</main>
+<nav><div onclick="location.href='index.html'" style="cursor:pointer"><b>⌂</b>Home</div><div onclick="location.href='maintenance.html'" style="cursor:pointer"><b>▣</b>Maintenance</div><div onclick="location.href='service.html'" style="cursor:pointer"><b>＋</b>Service</div><div onclick="location.href='more.html'" style="cursor:pointer"><b>☰</b>More</div></nav>
+<script>if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');</script>
+<div class="contact-fab" onclick="location.href='https://wa.me/971555662007?text=Hello%20DR%20HOME%2C%20I%20need%20help%20with%20my%20property.'" aria-label="WhatsApp DR HOME">
+<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.5 8.5 0 0 1-9 8.5 9.3 9.3 0 0 1-3.8-.8L3 21l1.8-4.8A8.5 8.5 0 1 1 21 11.5Z"/><path d="M8.7 8.7c.6 2.8 2.1 4.3 4.8 5.6"/><path d="M14 14.1l1.6-.7 1.5 1.2"/></svg>
+</div>
+</body></html>

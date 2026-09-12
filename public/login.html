@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#080809">
+<link rel="manifest" href="manifest.json">
+<title>Sign in · DR HOME</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#080809;color:#fff;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
+.app{max-width:430px;min-height:100vh;margin:auto;padding:calc(34px + env(safe-area-inset-top)) 22px calc(28px + env(safe-area-inset-bottom));display:flex;flex-direction:column;background:radial-gradient(circle at 50% 5%,#202226 0,#101113 30%,#080809 68%)}
+.brand{display:flex;justify-content:center;margin-top:6vh}
+.badge{width:116px;height:116px;border-radius:50%;padding:9px;background:linear-gradient(145deg,#2a2c31,#0f1012);border:1px solid rgba(255,255,255,.15);box-shadow:0 18px 45px rgba(0,0,0,.42),inset 0 1px 0 rgba(255,255,255,.12);display:grid;place-items:center}
+.badge img{width:100%;height:100%;object-fit:contain;border-radius:50%}
+.copy{text-align:center;margin:34px 0 28px}
+.kicker{color:#8e9197;font-size:11px;letter-spacing:1.8px;text-transform:uppercase}
+h1{font-size:30px;margin:7px 0 8px;letter-spacing:-.6px}
+.copy p{margin:0;color:#9ca0a6;font-size:13px;line-height:1.5}
+.form{margin-top:auto;margin-bottom:auto}
+.field{margin:13px 0}
+label{display:block;color:#a7aab0;font-size:11px;letter-spacing:.7px;text-transform:uppercase;margin:0 0 8px 3px}
+input{width:100%;height:54px;border-radius:15px;border:1px solid #303237;background:#17181b;color:#fff;padding:0 15px;font-size:15px;outline:none}
+input:focus{border-color:#666a70;background:#1b1c20}
+.password-wrap{position:relative}
+.show{position:absolute;right:12px;top:50%;transform:translateY(-50%);font-size:12px;color:#b4b7bc;cursor:pointer;padding:8px}
+.actions{display:flex;justify-content:flex-end;margin-top:8px}
+.forgot{font-size:12px;color:#a8abb0;cursor:pointer}
+.btn{margin-top:22px;background:linear-gradient(#fff,#e8e9eb);color:#111;border-radius:16px;padding:16px;text-align:center;font-weight:780;cursor:pointer}
+.error{display:none;margin-top:12px;padding:11px 12px;border-radius:12px;background:rgba(194,67,67,.11);border:1px solid rgba(225,100,100,.2);color:#f1aaaa;font-size:12px}
+.footer{text-align:center;color:#65686d;font-size:10px;line-height:1.5;margin-top:25px}
+</style>
+</head>
+<body>
+<main class="app">
+  <div class="brand"><div class="badge"><img src="logo.png" alt="DR HOME"></div></div>
+  <div class="copy">
+    <div class="kicker">Customer Portal</div>
+    <h1>Welcome home.</h1>
+    <p>Sign in to access your properties, maintenance<br>history and service requests.</p>
+  </div>
+
+  <div class="form">
+    <div class="field">
+      <label>Email or Customer ID</label>
+      <input id="email" autocomplete="username" placeholder="name@example.com">
+    </div>
+    <div class="field">
+      <label>Password</label>
+      <div class="password-wrap">
+        <input id="password" type="password" autocomplete="current-password" placeholder="••••••••">
+        <div class="show" id="showPass">SHOW</div>
+      </div>
+    </div>
+    <div class="actions"><div class="forgot">Forgot password?</div></div>
+    <div class="error" id="error">Please enter your login details.</div>
+    <div class="btn" id="loginBtn">Sign In</div>
+  </div>
+
+  <div class="footer">Secure access to your DR HOME customer account.<br>BUILD · MAINTAIN · ENJOY</div>
+</main>
+<script src="auth.js"></script>
+<script>
+const email=document.getElementById('email');
+const pass=document.getElementById('password');
+const err=document.getElementById('error');
+
+function submit(){
+  if(!window.drhomeLogin(email.value, pass.value)){
+    err.style.display='block';
+  }
+}
+document.getElementById('loginBtn').onclick=submit;
+pass.addEventListener('keydown',e=>{if(e.key==='Enter')submit()});
+email.addEventListener('keydown',e=>{if(e.key==='Enter')pass.focus()});
+document.getElementById('showPass').onclick=function(){
+  const show=pass.type==='password';
+  pass.type=show?'text':'password';
+  this.textContent=show?'HIDE':'SHOW';
+};
+</script>
+</body>
+</html>
