@@ -18,6 +18,16 @@ API health check:
 GET http://localhost:3000/api/health
 ```
 
+Ports can be changed in `.env`:
+
+```text
+WEB_PORT=3000
+DB_HOST_PORT=3306
+PORT=3000
+```
+
+`WEB_PORT` is the host port you open in the browser. `PORT` is the internal API container port. `DB_HOST_PORT` is only needed if you want to reach MariaDB from the host machine.
+
 Seeded demo login:
 
 ```text

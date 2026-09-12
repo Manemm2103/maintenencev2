@@ -9,7 +9,7 @@ services:
       DB_HOST: mariadb
       DB_PORT: 3306
     ports:
-      - "3000:3000"
+      - "${WEB_PORT:-3000}:${PORT:-3000}"
     depends_on:
       mariadb:
         condition: service_healthy
@@ -24,7 +24,7 @@ services:
       - --character-set-server=utf8mb4
       - --collation-server=utf8mb4_unicode_ci
     ports:
-      - "3306:3306"
+      - "${DB_HOST_PORT:-3306}:3306"
     volumes:
       - mariadb_data:/var/lib/mysql
     healthcheck:
